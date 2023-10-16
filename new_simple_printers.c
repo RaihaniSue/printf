@@ -54,27 +54,36 @@ int print_rev(va_list ap, params_t *params)
  */
 int print_rot13(va_list ap, params_t *params)
 {
-	int i, index;
+	char x;
+	char *str;
+	unsigned int i, j;
 	int count = 0;
-	char arr[] =
-		"NOPQRSTUVWXYZABCDEFGHIJKLM	nopqrstuvwxyzabcdefghijklm";
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	char *a = va_arg(ap, char *);
+	str = va_arg(ap, char *);
 	(void)params;
 
-	i = 0;
-	index = 0;
-	while (a[i])
+	if (str == NULL)
+		str = "(AHYY)";
+	for (i = 0; str[i]; i++)
 	{
-		if ((a[i] >= 'A' && a[i] <= 'Z')
-			|| (a[i] >= 'a' && a[i] <= 'z'))
+		for (j = 0; in[j]; j++)
 		{
-			index = a[i] - 65;
-			count += _putchar(arr[index]);
+			if (in[j] == str[i])
+			{
+				x = out[j];
+				write(1, &x, 1);
+				count++;
+				break;
+			}
 		}
-		else
-			count += _putchar(a[i]);
-		i++;
+		if (!in[j])
+		{
+			x = str[i];
+			write(1, &x, 1);
+			count++;
+		}
 	}
 	return (count);
 }
