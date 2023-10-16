@@ -55,4 +55,19 @@ int print_percent(void)
 	_putchar(37); /* 37 is equals to percentage in ascii code*/
 	return (0);
 }
-~
+/**
+ * _strlen - Entry point
+ * @s: the given parameter
+ * Return:the length of the given parameter
+ */
+int _strlen(char *s)
+{
+	int x;
+
+	x = 0;
+	while (s[x] != '\0')
+	{
+		x++;
+	}
+	return (x);
+}~
