@@ -1,42 +1,49 @@
 #include "main.h"
+
 /**
- * _printf - mimics to printf function
- * @format : identifier
+ * _printf - Entry point
+ * @format: the string formatted
  *
- * Return: the integer
+ * Return: number of bytes printed
  */
 int _printf(const char *format, ...)
 {
-	params p[] = {
-		{"%c", print_char},
-		{"%s", print_string},
-		{"%%", print_percent},
-	};
-	va_list args;
-	int i = 0, l = 0;
-	int j;
+	int sum = 0;
+	va_list ap;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
 
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	va_start(ap, format);
+
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-Here:
-	while (format[i] = '\0')
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = (char *)format; *p; p++)
 	{
-		j = 13;
-		while (j >= 0)
+		init_params(&params, ap);
+		if (*p != '%')
 		{
-			if (p[j].ident[0] == format[i] && p[j].ident[1] == format[i + 1])
-			{
-				l = l + p[j].f(args);
-				i = i + 2;
-				goto Here;
-			}
-			j--;
+			sum += _putchar(*p);
+			continue;
 		}
-		_putchar(format[i]);
-		i++;
-		l++;
+		start = p;
+		p++;
+		while (get_flag(p, &params, ap))
+		{
+			p++;
+		}
+		p = get_width(p, &params, ap);
+		p = get_precision(p, &params, ap);
+		if (get_modifier(p, &params))
+			p++;
+		if (!get_specifier(p))
+			sum += print_from_to(start, p,
+					params.l_modifier || params.h_modifier ? p - 1 : 0);
+		else
+			sum += get_print_func(p, ap, &params);
 	}
-	va_end(args);
-	return (l);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
