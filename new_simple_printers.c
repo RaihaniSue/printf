@@ -54,26 +54,29 @@ int print_rev(va_list ap, params_t *params)
  */
 int print_rot13(va_list ap, params_t *params)
 {
-	int i, index;
-	int count = 0;
-	char arr[] =
-		"NOPQRSTUVWXYZABCDEFGHIJKLM	nopqrstuvwxyzabcdefghijklm";
-	char *a = va_arg(ap, char *);
+	int idx_input, idx_output, character_count = 0;
+	char *str;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	str = va_arg(ap, char *);
+	/* Extract the string from va_list */
 	(void)params;
 
-	i = 0;
-	index = 0;
-	while (a[i])
+
+	if (str == NULL) /* Check if the string is NULL */
+		str = "(null)"; /* Set the string to "(null)" in this case */
+	for (idx_input = 0; str[idx_input] != '\0'; idx_input++)
 	{
-		if ((a[i] >= 'A' && a[i] <= 'Z')
-			|| (a[i] >= 'a' && a[i] <= 'z'))
+		for (idx_output = 0; input[idx_output] != '\0'; idx_output++)
 		{
-			index = a[i] - 65;
-			count += _putchar(arr[index]);
+			if (str[idx_input] == input[idx_output]) /* if char in input matche */
+			{
+				_putchar(output[idx_output]); /* Print the corespondin char from output */
+				character_count++; /* Increment the character count */
+				break; /* Exit the inner loop to continue with the next character */
+			}
 		}
-		else
-			count += _putchar(a[i]);
-		i++;
 	}
-	return (count);
+	return (character_count); /* Return the total number of characters printed */
 }
