@@ -50,7 +50,7 @@ int print_HEX(va_list ap, params_t *params)
 		l = (unsigned int)va_arg(ap, unsigned int);
 
 	str = convert(l, 16, CONVERT_UNSIGNED, params);
-	if (params->hashtag_flah && l)
+	if (params->hashtag_flag && l)
 	{
 		*--str = 'X';
 		*--str = '0';
