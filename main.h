@@ -22,3 +22,5 @@ int print_char(va_list opaq);
 int print_string(va_list opaq);
 int print_percent(va_list opaq);
 int _strlen(char *s);
+
+#endif
