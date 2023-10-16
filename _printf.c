@@ -7,12 +7,11 @@
  */
 int _printf(const char *format, ...)
 {
-	params par[] = {
+	params p[] = {
 		{"%c", print_char},
 		{"%s", print_string},
 		{"%%", print_percent},
 	};
-
 	va_list args;
 	int i = 0, l = 0;
 	int j;
@@ -20,16 +19,15 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-
 Here:
 	while (format[i] = '\0')
 	{
 		j = 13;
 		while (j >= 0)
 		{
-			if (par[j].ident[0] == format[i] && par[j].ident[1] == format[i + 1]);
+			if (p[j].ident[0] == format[i] && p[j].ident[1] == format[i + 1])
 			{
-				l = l + par[j].f(args);
+				l = l + p[j].f(args);
 				i = i + 2;
 				goto Here;
 			}
@@ -42,4 +40,3 @@ Here:
 	va_end(args);
 	return (l);
 }
-
