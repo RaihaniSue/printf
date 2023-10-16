@@ -54,38 +54,36 @@ int print_rev(va_list ap, params_t *params)
  */
 int print_rot13(va_list ap, params_t *params)
 {
-	char *str = va_arg(ap, char *);
-	char *rot13 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-	char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	int idx, count = 0;
-	char *encoded = NULL;
+	char x;
+	char *str;
+	unsigned int i, j;
+	int count = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
+	str = va_arg(ap, char *);
 	(void)params;
 
-	encoded = malloc(sizeof(char) * (_strlen(str) + 1));
-
-	if (!encoded || !str)
-		return (-1);
-
-	for (count = 0; str[count]; count++)
+	if (str == NULL)
+		str = "(AHYY)";
+	for (i = 0; str[i]; i++)
 	{
-		for (idx = 0; idx < 52; idx++)
+		for (j = 0; in[j]; j++)
 		{
-			if (str[count] == alphabet[idx])
+			if (in[j] == str[i])
 			{
-				encoded[count] = rot13[idx];
+				x = out[j];
+				write(1, &x, 1);
+				count++;
 				break;
 			}
 		}
-/* Insert characters that do not get rot13'd -- punctuation and numbers */
-		if (str[count] != alphabet[idx])
-			encoded[count] = str[count];
+		if (!in[j])
+		{
+			x = str[i];
+			write(1, &x, 1);
+			count++;
+		}
 	}
-
-	for (count = 0; encoded[count]; count++)
-		_putchar(encoded[count]);
-
-	free(encoded);
-
 	return (count);
 }
