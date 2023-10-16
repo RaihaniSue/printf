@@ -1,12 +1,10 @@
 #include "main.h"
-
 /**
  * get_precision - entry point
- * @p: str
+ * @p: string
  * @params: struct
- * @ap: params
- *
- * Return: the newer pointer
+ * @ap: value parameters
+ * Return: latest pointer
  */
 char *get_precision(char *p, params_t *params, va_list ap)
 {

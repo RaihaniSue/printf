@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * init_params - entry point
+ * init_params - entry point for parameters
  * @params: the parameters
- * @ap: struct args
+ * @ap: struct argument
  *
  * Return: void
  */
