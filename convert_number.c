@@ -1,9 +1,8 @@
 #include "main.h"
 /**
- * print_hex - entry point
- * @ap: args
- * @params: struct
- *
+ * print_hex - point of entry for hex
+ * @ap: argument
+ * @params: structure
  * Return: bytes printed
  */
 int print_hex(va_list ap, params_t *params)

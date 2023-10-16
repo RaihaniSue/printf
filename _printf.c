@@ -1,10 +1,8 @@
 #include "main.h"
-
 /**
- * _printf - Entry point
- * @format: the string formatted
- *
- * Return: number of bytes printed
+ * _printf - Point of entry
+ * @format: formatted string
+ * Return: no of bytes printed
  */
 int _printf(const char *format, ...)
 {

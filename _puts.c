@@ -1,9 +1,7 @@
 #include "main.h"
-
 /**
- * _puts - entry point
+ * _puts - point of entry
  * @str: string to print
- *
  * Return: void
  */
 int _puts(char *str)
@@ -17,9 +15,8 @@ int _puts(char *str)
 
 /**
  * _putchar - entry point
- * @c: char to print
- *
- * Return: 1 always for Success -1 for failure
+ * @c: character to print
+ * Return: 1 for Success and -1 for failure
  */
 int _putchar(int c)
 {
@@ -35,4 +32,3 @@ int _putchar(int c)
 		buf[i++] = c;
 	return (1);
 }
-
