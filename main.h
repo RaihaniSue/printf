@@ -12,6 +12,8 @@ typedef struct fmt
 	int (*f)();
 } params;
 
+int _printf(const char *format, ...);
+
 
 
 
